@@ -10,6 +10,7 @@ Patch0:		%{name}-make.patch
 URL:		http://gborg.postgresql.org/project/libpqpp/projdisplay.php
 BuildRequires:	postgresql-devel >= 7.3
 Obsoletes:	postgresql-c++
+Provides:	postgresql-c++
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -27,6 +28,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}
 Requires:	postgresql-devel
 Obsoletes:	postgresql-c++-devel
+Provides:	postgresql-c++-devel
 
 %description devel
 This package includes header files for older C++ interface.
@@ -40,6 +42,7 @@ Summary(pl):	Starszy interfejs C++ do PostgreSQL - biblioteki statyczne
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
 Obsoletes:	postgresql-c++-static
+Provides:	postgresql-c++-static
 
 %description static
 This package includes static library for older interface C++.
