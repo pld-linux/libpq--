@@ -27,7 +27,7 @@ to starsza implementacja, do³±czana do PostgreSQL-a a¿ do 7.2.x.
 Summary:	Older C++ interface to PostgreSQL - development part
 Summary(pl):	Starszy interfejs C++ do PostgreSQL - czê¶æ programistyczna
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	postgresql-devel
 Obsoletes:	postgresql-c++-devel
 Provides:	postgresql-c++-devel
@@ -42,7 +42,7 @@ Pakiet ten zawiera pliki nag³ówkowe dla starszego interfejsu C++.
 Summary:	Older C++ interface to PostgreSQL - static libraries
 Summary(pl):	Starszy interfejs C++ do PostgreSQL - biblioteki statyczne
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 Obsoletes:	postgresql-c++-static
 Provides:	postgresql-c++-static
 
