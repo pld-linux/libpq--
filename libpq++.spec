@@ -8,6 +8,7 @@ Group:		Libraries
 Source0:	ftp://gborg.postgresql.org/pub/libpqpp/stable/%{name}-%{version}.tar.gz
 # Source0-md5:	da71cb79ef45cef55f4bc97a33a0857d
 Patch0:		%{name}-make.patch
+Patch1:		%{name}-libdir.patch
 URL:		http://gborg.postgresql.org/project/libpqpp/projdisplay.php
 BuildRequires:	postgresql-devel >= 7.3
 Obsoletes:	postgresql-c++
@@ -53,17 +54,20 @@ Pakiet ten zawiera biblioteki statyczne dla starszego interfejsu C++.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p0
 
 %build
 %{__make} static \
-	POSTGRES_HOME=/usr \
+	POSTGRES_HOME=%{_prefix} \
+	LIBDIR=%{_libdir} \
 	CXX="%{__cxx}" \
 	CXXFLAGS="%{rpmcflags} -Wall"
 
 rm -f *.o
 %{__make} \
-	POSTGRES_HOME=/usr \
+	POSTGRES_HOME=%{_prefix} \
+	LIBDIR=%{_libdir} \
 	CXX="%{__cxx}" \
 	CXXFLAGS="%{rpmcflags} -Wall -fPIC"
 
@@ -73,6 +77,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	LIBDIR=%{_libdir} \
 	POSTGRES_HOME=%{_prefix}
 
 install examples/*.* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
