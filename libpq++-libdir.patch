@@ -1,0 +1,35 @@
+--- Makefile~	2004-08-19 11:20:05.000000000 +0200
++++ Makefile	2004-08-19 11:21:36.000000000 +0200
+@@ -12,6 +12,8 @@
+ SO_MINOR_VERSION= 0
+ 
+ POSTGRES_HOME=/usr/local/pgsql
++LIBDIR=$(POSTGRES_HOME)/lib
++
+ CXXOPTS= -DHAVE_NAMESPACE_STD -DHAVE_CXX_STRING_HEADER -DDLLIMPORT=""
+ 
+ TARGET= libpq++
+@@ -29,7 +31,7 @@
+ static: $(static)
+ 
+ $(soname) : $(OBJS)
+-	$(CXX) $(CXXFLAGS) $(OBJS) -L$(POSTGRES_HOME)/lib -l$(LIBS) $(SHARED) -o $(soname)
++	$(CXX) $(CXXFLAGS) $(OBJS) -L$(LIBDIR) -l$(LIBS) $(SHARED) -o $(soname)
+ 
+ $(static) : $(OBJS)
+ 	ar crs $(static) $(OBJS)
+@@ -42,10 +44,10 @@
+ 	rm -f $(OBJS) $(soname)
+ 
+ install:
+-	install -d $(DESTDIR)$(POSTGRES_HOME)/lib
+-	install $(soname) $(static) $(DESTDIR)$(POSTGRES_HOME)/lib
+-	rm -f $(DESTDIR)$(POSTGRES_HOME)/lib/$(TARGET).so
+-	ln -s $(soname) $(DESTDIR)$(POSTGRES_HOME)/lib/$(TARGET).so
++	install -d $(DESTDIR)$(LIBDIR)
++	install $(soname) $(static) $(DESTDIR)$(LIBDIR)
++	rm -f $(DESTDIR)$(LIBDIR)/$(TARGET).so
++	ln -s $(soname) $(DESTDIR)$(LIBDIR)/$(TARGET).so
+ 	install -d $(DESTDIR)$(POSTGRES_HOME)/include/libpq++
+ 	install -c $(TARGET).h $(DESTDIR)$(POSTGRES_HOME)/include
+ 	for i in $(LIBPGXXHEADERS); do install -c $$i $(DESTDIR)$(POSTGRES_HOME)/include/libpq++ || exit 1; done
