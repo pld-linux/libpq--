@@ -1,0 +1,42 @@
+--- libpq++-4.0/Makefile.orig	Wed Nov 27 05:46:08 2002
++++ libpq++-4.0/Makefile	Wed Mar 12 23:02:38 2003
+@@ -20,14 +20,21 @@
+ OBJS= pgconnection.o pgdatabase.o pgtransdb.o pgcursordb.o pglobject.o
+ LIBPGXXHEADERS = pgconnection.h pgdatabase.h pgtransdb.h pgcursordb.h pglobject.h
+ 
+-SHARED= -fpic -shared -Wl,-x,-soname,$(TARGET).so.$(SO_MAJOR_VERSION) -Wl,-rpath,$(POSTGRES_HOME)/lib
++SHARED= -fpic -shared -Wl,-x,-soname,$(TARGET).so.$(SO_MAJOR_VERSION)
+ soname=$(TARGET).so.$(SO_MAJOR_VERSION).$(SO_MINOR_VERSION)
++static=$(TARGET).a
+ 
+ all:  $(soname)
+ 
++static: $(static)
++
+ $(soname) : $(OBJS)
+ 	$(CXX) $(CXXFLAGS) $(OBJS) -L$(POSTGRES_HOME)/lib -l$(LIBS) $(SHARED) -o $(soname)
+ 
++$(static) : $(OBJS)
++	ar crs $(static) $(OBJS)
++	ranlib $(static)
++
+ %.o	: %.cc
+ 	$(CXX) -c $(CXXFLAGS) $(CXXOPTS) -I$(POSTGRES_HOME)/include $<
+ 
+@@ -35,9 +42,10 @@
+ 	rm -f $(OBJS) $(soname)
+ 
+ install:
+-	install $(soname) $(POSTGRES_HOME)/lib
+-	rm -f $(POSTGRES_HOME)/lib/$(TARGET).so
+-	ln -s $(POSTGRES_HOME)/lib/$(soname) $(POSTGRES_HOME)/lib/$(TARGET).so
+-	install -c $(TARGET).h $(POSTGRES_HOME)/include
+-	-mkdir $(POSTGRES_HOME)/include/libpq++
+-	for i in $(LIBPGXXHEADERS); do install -c $$i $(POSTGRES_HOME)/include/libpq++ || exit 1; done
++	install -d $(DESTDIR)$(POSTGRES_HOME)/lib
++	install $(soname) $(static) $(DESTDIR)$(POSTGRES_HOME)/lib
++	rm -f $(DESTDIR)$(POSTGRES_HOME)/lib/$(TARGET).so
++	ln -s $(soname) $(DESTDIR)$(POSTGRES_HOME)/lib/$(TARGET).so
++	install -d $(DESTDIR)$(POSTGRES_HOME)/include/libpq++
++	install -c $(TARGET).h $(DESTDIR)$(POSTGRES_HOME)/include
++	for i in $(LIBPGXXHEADERS); do install -c $$i $(DESTDIR)$(POSTGRES_HOME)/include/libpq++ || exit 1; done
