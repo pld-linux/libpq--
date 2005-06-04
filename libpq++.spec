@@ -10,6 +10,7 @@ Source0:	ftp://gborg.postgresql.org/pub/libpqpp/stable/%{name}-%{version}.tar.gz
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-libdir.patch
 URL:		http://gborg.postgresql.org/project/libpqpp/projdisplay.php
+BuildRequires:	libstdc++-devel
 BuildRequires:	postgresql-devel >= 7.3
 Obsoletes:	postgresql-c++
 Provides:	postgresql-c++
