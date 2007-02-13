@@ -1,5 +1,5 @@
 Summary:	Older implementation of C++ interface to PostgreSQL
-Summary(pl.UTF-8):   Starsza implementacja interfejsu C++ do PostgreSQL
+Summary(pl.UTF-8):	Starsza implementacja interfejsu C++ do PostgreSQL
 Name:		libpq++
 Version:	4.0
 Release:	3
@@ -26,7 +26,7 @@ to starsza implementacja, dołączana do PostgreSQL-a aż do 7.2.x.
 
 %package devel
 Summary:	Older C++ interface to PostgreSQL - development part
-Summary(pl.UTF-8):   Starszy interfejs C++ do PostgreSQL - część programistyczna
+Summary(pl.UTF-8):	Starszy interfejs C++ do PostgreSQL - część programistyczna
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libstdc++-devel
@@ -42,7 +42,7 @@ Pakiet ten zawiera pliki nagłówkowe dla starszego interfejsu C++.
 
 %package static
 Summary:	Older C++ interface to PostgreSQL - static libraries
-Summary(pl.UTF-8):   Starszy interfejs C++ do PostgreSQL - biblioteki statyczne
+Summary(pl.UTF-8):	Starszy interfejs C++ do PostgreSQL - biblioteki statyczne
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	postgresql-c++-static
