@@ -14,7 +14,7 @@
  
  $(soname) : $(OBJS)
 -	$(CXX) $(CXXFLAGS) $(OBJS) -L$(POSTGRES_HOME)/lib -l$(LIBS) $(SHARED) -o $(soname)
-+	$(CXX) $(CXXFLAGS) $(OBJS) -L$(LIBDIR) -l$(LIBS) $(SHARED) -o $(soname)
++	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(OBJS) -L$(LIBDIR) -l$(LIBS) $(SHARED) -o $(soname)
  
  $(static) : $(OBJS)
  	ar crs $(static) $(OBJS)
