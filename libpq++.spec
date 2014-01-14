@@ -2,13 +2,14 @@ Summary:	Older implementation of C++ interface to PostgreSQL
 Summary(pl.UTF-8):	Starsza implementacja interfejsu C++ do PostgreSQL
 Name:		libpq++
 Version:	4.0
-Release:	3
+Release:	4
 License:	BSD
 Group:		Libraries
 Source0:	ftp://gborg.postgresql.org/pub/libpqpp/stable/%{name}-%{version}.tar.gz
 # Source0-md5:	da71cb79ef45cef55f4bc97a33a0857d
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-libdir.patch
+Patch2:		include.patch
 URL:		http://gborg.postgresql.org/project/libpqpp/projdisplay.php
 BuildRequires:	libstdc++-devel
 BuildRequires:	postgresql-devel >= 7.3
@@ -58,6 +59,7 @@ Pakiet ten zawiera biblioteki statyczne dla starszego interfejsu C++.
 %setup -q
 %patch0 -p1
 %patch1 -p0
+%patch2 -p1
 
 %build
 %{__make} static \
@@ -71,7 +73,8 @@ rm -f *.o
 	POSTGRES_HOME=%{_prefix} \
 	LIBDIR=%{_libdir} \
 	CXX="%{__cxx}" \
-	CXXFLAGS="%{rpmcflags} -Wall -fPIC"
+	CXXFLAGS="%{rpmcflags} -Wall -fPIC" \
+	LDFLAGS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -81,6 +84,8 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 	DESTDIR=$RPM_BUILD_ROOT \
 	LIBDIR=%{_libdir} \
 	POSTGRES_HOME=%{_prefix}
+
+ln -sf libpq++.so.4.0 $RPM_BUILD_ROOT%{_libdir}/libpq++.so.4
 
 install examples/*.* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
@@ -94,6 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc CHANGES README
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/lib*.so.4
 
 %files devel
 %defattr(644,root,root,755)
