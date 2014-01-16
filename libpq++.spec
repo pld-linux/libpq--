@@ -68,7 +68,7 @@ Pakiet ten zawiera biblioteki statyczne dla starszego interfejsu C++.
 	CXX="%{__cxx}" \
 	CXXFLAGS="%{rpmcflags} -Wall"
 
-rm -f *.o
+%{__rm} *.o
 %{__make} \
 	POSTGRES_HOME=%{_prefix} \
 	LIBDIR=%{_libdir} \
@@ -98,17 +98,17 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc CHANGES README
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
-%attr(755,root,root) %ghost %{_libdir}/lib*.so.4
+%attr(755,root,root) %{_libdir}/libpq++.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libpq++.so.4
 
 %files devel
 %defattr(644,root,root,755)
 %doc docs/*.html
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/libpq++.so
+%{_includedir}/libpq++.h
 %{_includedir}/libpq++
 %{_examplesdir}/%{name}-%{version}
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libpq++.a
