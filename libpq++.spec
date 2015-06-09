@@ -2,7 +2,7 @@ Summary:	Older implementation of C++ interface to PostgreSQL
 Summary(pl.UTF-8):	Starsza implementacja interfejsu C++ do PostgreSQL
 Name:		libpq++
 Version:	4.0
-Release:	4
+Release:	5
 License:	BSD
 Group:		Libraries
 Source0:	ftp://gborg.postgresql.org/pub/libpqpp/stable/%{name}-%{version}.tar.gz
