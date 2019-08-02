@@ -5,12 +5,12 @@ Version:	4.0
 Release:	5
 License:	BSD
 Group:		Libraries
-Source0:	ftp://gborg.postgresql.org/pub/libpqpp/stable/%{name}-%{version}.tar.gz
+Source0:	https://ftp.postgresql.org/pub/projects/gborg/libpqpp/stable/%{name}-%{version}.tar.gz
 # Source0-md5:	da71cb79ef45cef55f4bc97a33a0857d
 Patch0:		%{name}-make.patch
 Patch1:		%{name}-libdir.patch
 Patch2:		include.patch
-URL:		http://gborg.postgresql.org/project/libpqpp/projdisplay.php
+URL:		https://www.postgresql.org/docs/7.0/libpqplusplus.htm
 BuildRequires:	libstdc++-devel
 BuildRequires:	postgresql-devel >= 7.3
 Provides:	postgresql-c++
